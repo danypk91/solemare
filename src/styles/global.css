@@ -197,6 +197,44 @@ h1, h2, h3, h4, h5 {
   60%      { transform: translateY(-2px); }
 }
 
+/* ── Hero clouds ── */
+.hero-cloud {
+  opacity: 0;
+  animation: sunAppear 2s ease-out calc(0.3s + var(--cloud-delay, 0s)) forwards;
+}
+
+.hero-cloud svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: cloudDrift 28s ease-in-out var(--cloud-delay, 0s) infinite;
+}
+
+@keyframes cloudDrift {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(60px); }
+}
+
+/* ── Hero seagulls ── */
+.hero-seagull {
+  opacity: 0;
+  animation: sunAppear 1s ease-out calc(0.8s + var(--seagull-delay, 0s)) forwards;
+}
+
+.hero-seagull svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: seagullFloat 5s ease-in-out var(--seagull-delay, 0s) infinite;
+}
+
+@keyframes seagullFloat {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(15px, -12px); }
+  50%      { transform: translate(30px, -4px); }
+  75%      { transform: translate(18px, -16px); }
+}
+
 /* ── Hero sun ── */
 .hero-sun {
   position: absolute;
@@ -281,11 +319,11 @@ h1, h2, h3, h4, h5 {
     transform: none !important;
     will-change: auto !important;
   }
-  .hero-sun {
+  .hero-cloud, .hero-seagull, .hero-sun {
     opacity: 1 !important;
     animation: none !important;
   }
-  .hero-sun svg {
+  .hero-cloud svg, .hero-seagull svg, .hero-sun svg {
     animation: none !important;
   }
 }
