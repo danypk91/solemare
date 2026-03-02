@@ -1,0 +1,52 @@
+---
+import MenuItem from './MenuItem.astro';
+
+interface Voce {
+  nome: string;
+  prezzo: string;
+  descrizione?: string;
+  badge?: string;
+}
+
+interface Props {
+  nome: string;
+  id: string;
+  icona?: string;
+  voci: Voce[];
+}
+
+const { nome, id, icona, voci } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  coffee: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 110 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`,
+  drink: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M19.5 2l-7.5 9-7.5-9h15z"/></svg>`,
+  cocktail: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M2 2l10 10L22 2H2z"/><path d="M7 7h10"/></svg>`,
+  food: `<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13h18c0 4.97-4.03 9-9 9s-9-4.03-9-9z"/><path d="M3 13c0-2 1-4 3-5.5"/><path d="M21 13c0-2-1-4-3-5.5"/><line x1="12" y1="2" x2="12" y2="7"/><circle cx="12" cy="9" r="2"/></svg>`,
+};
+
+const iconSvg = icona && iconMap[icona] ? iconMap[icona] : null;
+---
+
+<section id={id} class="scroll-mt-28">
+  <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <div class="flex items-center gap-3 mb-4 pb-2 border-b-2 border-mare-200">
+      {iconSvg && (
+        <span class="text-mare-600" set:html={iconSvg} />
+      )}
+      <h2 class="font-display text-2xl font-bold text-mare-900">{nome}</h2>
+      <span class="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+        {voci.length} voci
+      </span>
+    </div>
+    <div>
+      {voci.map((voce) => (
+        <MenuItem
+          nome={voce.nome}
+          prezzo={voce.prezzo}
+          descrizione={voce.descrizione}
+          badge={voce.badge}
+        />
+      ))}
+    </div>
+  </div>
+</section>

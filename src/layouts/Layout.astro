@@ -1,0 +1,145 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import siteConfig from '../data/siteConfig.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${siteConfig.nome} - Stabilimento Balneare a Loano`,
+  description = `${siteConfig.nome} di ${siteConfig.titolare}: stabilimento balneare a Loano (SV). Spiaggia attrezzata, bar, ristoro e relax sulla Riviera Ligure.`,
+  ogImage = '/images/og-image.jpg',
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="it_IT" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- View Transitions -->
+    <ClientRouter />
+
+    <!-- Global CSS -->
+    <style is:global>
+      @import '../styles/global.css';
+    </style>
+
+    <!-- JSON-LD LocalBusiness -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": siteConfig.nome,
+      "description": description,
+      "url": Astro.site?.toString(),
+      "telephone": siteConfig.telefono,
+      "email": siteConfig.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Lungomare di Loano",
+        "addressLocality": "Loano",
+        "addressRegion": "SV",
+        "postalCode": "17025",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": siteConfig.coordinate.lat,
+        "longitude": siteConfig.coordinate.lng
+      },
+      "openingHours": "Mo-Su 08:00-19:00",
+      "image": ogImage
+    })} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <Header />
+
+    <main class="flex-1" transition:animate="fade">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+
+    <!-- Scroll animation observer + parallax -->
+    <script>
+      const ANIM_SELECTORS = '.fade-in, .slide-in-left, .slide-in-right, .scale-in, .blur-in';
+
+      function initScrollObserver() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        document.querySelectorAll(ANIM_SELECTORS).forEach((el) => observer.observe(el));
+      }
+
+      // Parallax — single CSS variable, RAF-throttled
+      function initParallax() {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        if (prefersReduced || isTouch) return;
+
+        let ticking = false;
+        function onScroll() {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              document.documentElement.style.setProperty('--scroll-y', String(window.scrollY));
+              ticking = false;
+            });
+          }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+
+      // Init on first load
+      initScrollObserver();
+      initParallax();
+
+      // Re-init after View Transition swap
+      document.addEventListener('astro:after-swap', () => {
+        initScrollObserver();
+        initParallax();
+      });
+    </script>
+  </body>
+</html>

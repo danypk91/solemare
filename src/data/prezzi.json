@@ -1,0 +1,33 @@
+{
+  "periodi": [
+    {
+      "nome": "Bassa Stagione",
+      "date": "Maggio - 14 Giugno / 1-30 Settembre",
+      "colore": "mare",
+      "file": [
+        { "tipo": "Ombrellone + 2 lettini", "giornaliero": "20", "settimanale": "110", "mensile": "350" },
+        { "tipo": "Ombrellone + 2 sdraio", "giornaliero": "15", "settimanale": "85", "mensile": "270" },
+        { "tipo": "Lettino aggiuntivo", "giornaliero": "5", "settimanale": "30", "mensile": "90" },
+        { "tipo": "Sdraio aggiuntiva", "giornaliero": "3", "settimanale": "18", "mensile": "55" }
+      ]
+    },
+    {
+      "nome": "Alta Stagione",
+      "date": "15 Giugno - 31 Agosto",
+      "colore": "sabbia",
+      "file": [
+        { "tipo": "Ombrellone + 2 lettini", "giornaliero": "30", "settimanale": "170", "mensile": "550" },
+        { "tipo": "Ombrellone + 2 sdraio", "giornaliero": "22", "settimanale": "130", "mensile": "420" },
+        { "tipo": "Lettino aggiuntivo", "giornaliero": "8", "settimanale": "45", "mensile": "140" },
+        { "tipo": "Sdraio aggiuntiva", "giornaliero": "5", "settimanale": "28", "mensile": "85" }
+      ]
+    }
+  ],
+  "abbonamenti": [
+    { "nome": "Stagionale Intero", "descrizione": "Maggio - Settembre, posto fisso prima fila", "prezzo": "2.200" },
+    { "nome": "Stagionale Standard", "descrizione": "Maggio - Settembre, posto fisso", "prezzo": "1.800" },
+    { "nome": "Mezza Stagione", "descrizione": "Maggio - Giugno oppure Settembre", "prezzo": "700" },
+    { "nome": "Carnet 10 ingressi", "descrizione": "Valido tutta la stagione, ombrellone + 2 lettini", "prezzo": "250" }
+  ],
+  "note": "I prezzi sono indicativi e possono variare. Contattaci per un preventivo personalizzato."
+}

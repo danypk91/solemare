@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import siteConfig from '../data/siteConfig.json';
+import servizi from '../data/servizi.json';
+---
+
+<Layout>
+  <Hero />
+
+  <!-- Chi Siamo -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <span class="text-sm font-semibold uppercase tracking-wider text-mare-500 mb-2 block">Benvenuti</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-mare-900 mb-6">
+          Il tuo stabilimento balneare a Loano
+        </h2>
+        <p class="text-gray-600 text-lg leading-relaxed mb-4">
+          <strong class="text-mare-800">{siteConfig.nome}</strong> di {siteConfig.titolare} vi accoglie
+          sulla splendida spiaggia di Loano, nel cuore della Riviera Ligure di Ponente.
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          Offriamo un servizio completo per una giornata di relax al mare: spiaggia attrezzata con ombrelloni
+          e lettini, un bar con ampia selezione di bevande e snack, e tutta la cura di una gestione familiare
+          che da anni accoglie turisti e residenti con il sorriso.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider: Chi Siamo → Servizi -->
+  <WaveDivider fill="var(--color-sabbia-50)" animated variant="b" />
+
+  <!-- Servizi -->
+  <section class="py-16 md:py-24 bg-sabbia-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center mb-12 fade-in">
+        <span class="text-sm font-semibold uppercase tracking-wider text-sabbia-600 mb-2 block">Cosa offriamo</span>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-mare-900">
+          I nostri servizi
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+        {servizi.map((servizio, i) => (
+          <div class="scale-in" style={`--stagger-index: ${i}`}>
+            <ServiceCard
+              titolo={servizio.titolo}
+              descrizione={servizio.descrizione}
+              icona={servizio.icona}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider: Servizi → CTA -->
+  <WaveDivider fill="var(--color-sabbia-50)" variant="a" flip />
+
+  <!-- CTA Finale -->
+  <section class="py-16 md:py-24 bg-gradient-to-br from-mare-700 to-mare-900 text-white">
+    <div class="max-w-3xl mx-auto px-4 text-center blur-in">
+      <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">
+        Pronti per una giornata al mare?
+      </h2>
+      <p class="text-mare-200 text-lg mb-8">
+        Contattaci per prenotare il tuo posto in spiaggia o per qualsiasi informazione.
+        Ti aspettiamo a Loano!
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/prezzi#contatti"
+          class="inline-flex items-center gap-2 bg-white text-mare-700 px-8 py-3.5 rounded-xl font-semibold text-lg hover:bg-sabbia-100 hover:-translate-y-0.5 hover:shadow-xl transition-all"
+        >
+          Contattaci
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
+        <a
+          href={`tel:${siteConfig.telefono}`}
+          class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold text-lg border border-white/30 hover:bg-white/25 hover:-translate-y-0.5 hover:shadow-xl transition-all"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+          </svg>
+          {siteConfig.telefonoDisplay}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

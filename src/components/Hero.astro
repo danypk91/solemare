@@ -1,0 +1,60 @@
+---
+import siteConfig from '../data/siteConfig.json';
+---
+
+<section class="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden pb-20 md:pb-28">
+  <!-- Background gradient with parallax -->
+  <div class="absolute inset-0 bg-gradient-to-br from-mare-600 via-mare-500 to-mare-400 parallax-bg">
+    <!-- Decorative circles with parallax-slow -->
+    <div class="parallax-slow absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-10 -left-10 w-48 h-48 md:w-80 md:h-80 md:-top-20 md:-left-20 bg-white/5 rounded-full"></div>
+      <div class="absolute top-1/3 -right-8 w-40 h-40 md:w-64 md:h-64 md:-right-16 bg-white/5 rounded-full"></div>
+      <div class="absolute bottom-1/4 left-1/4 w-32 h-32 md:w-48 md:h-48 bg-white/5 rounded-full"></div>
+    </div>
+  </div>
+
+  <div class="relative z-10 text-center px-4 max-w-3xl mx-auto hero-text-enter">
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+      {siteConfig.nome}
+    </h1>
+    <p class="text-xl sm:text-2xl text-white/90 mb-2 font-display italic">
+      {siteConfig.slogan}
+    </p>
+    <p class="text-white/70 mb-8 text-lg">
+      Loano (SV) &mdash; Riviera Ligure di Ponente
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="/prezzi#contatti"
+        class="inline-flex items-center gap-2 bg-white text-mare-700 px-8 py-3.5 rounded-xl font-semibold text-lg hover:bg-sabbia-100 hover:-translate-y-0.5 hover:shadow-xl transition-all shadow-lg"
+      >
+        Prenota ora
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+        </svg>
+      </a>
+      <a
+        href="/menu"
+        class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-8 py-3.5 rounded-xl font-semibold text-lg border border-white/30 hover:bg-white/25 hover:-translate-y-0.5 hover:shadow-xl transition-all"
+      >
+        Menu Bar
+      </a>
+    </div>
+  </div>
+
+  <!-- Animated waves — 3 layers, opaque fills, no compositing artifacts -->
+  <div class="hero-waves" aria-hidden="true">
+    <!-- Back wave (slowest) — light blue -->
+    <svg class="hero-wave hero-wave--1" viewBox="0 0 2880 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#93d1fd" d="M0,50 C360,90 720,10 1080,50 C1260,70 1380,60 1440,50 C1800,90 2160,10 2520,50 C2700,70 2820,60 2880,50 L2880,120 L0,120 Z"/>
+    </svg>
+    <!-- Mid wave — lighter blue -->
+    <svg class="hero-wave hero-wave--2" viewBox="0 0 2880 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#bfe3fe" d="M0,65 C240,35 480,95 720,65 C960,35 1200,95 1440,65 C1680,35 1920,95 2160,65 C2400,35 2640,95 2880,65 L2880,120 L0,120 Z"/>
+    </svg>
+    <!-- Front wave — solid white -->
+    <svg class="hero-wave hero-wave--3" viewBox="0 0 2880 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="white" d="M0,78 C180,58 360,98 540,78 C720,58 900,98 1080,78 C1260,58 1380,73 1440,78 C1620,58 1800,98 1980,78 C2160,58 2340,98 2520,78 C2700,58 2820,73 2880,78 L2880,120 L0,120 Z"/>
+    </svg>
+  </div>
+</section>

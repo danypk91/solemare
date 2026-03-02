@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MenuCategory from '../components/MenuCategory.astro';
+import menuData from '../data/menu.json';
+import siteConfig from '../data/siteConfig.json';
+---
+
+<Layout
+  title={`Menu Bar - ${siteConfig.nome}`}
+  description={`Menu del bar di ${siteConfig.nome}: caffetteria, bevande, cocktail, snack e panini. Consulta i prezzi aggiornati.`}
+>
+  <!-- Page header -->
+  <section class="relative bg-gradient-to-br from-mare-700 to-mare-800 text-white py-12 md:py-16 overflow-hidden">
+    <div class="max-w-2xl mx-auto px-4 text-center relative z-10">
+      <h1 class="font-display text-3xl md:text-4xl font-bold mb-2">Menu Bar</h1>
+      <p class="text-mare-200 text-lg">{siteConfig.nome} &mdash; Loano</p>
+      <p class="text-mare-300 text-sm mt-2">Caffetteria, bevande fresche, cocktail e stuzzichini vista mare</p>
+    </div>
+    <!-- Wave separator -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block">
+        <path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="var(--color-sabbia-50)"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Quick nav -->
+  <nav class="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+    <div class="relative">
+      <!-- Fade edges on mobile -->
+      <div class="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none md:hidden"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden"></div>
+      <div class="max-w-2xl mx-auto px-4 flex gap-1 py-2 overflow-x-auto scrollbar-hide">
+        {menuData.categorie.map((cat) => (
+          <a
+            href={`#${cat.id}`}
+            data-nav-target={cat.id}
+            class="quick-nav-link shrink-0 px-4 py-2 rounded-full text-sm font-medium text-mare-700 bg-mare-50 hover:bg-mare-100 transition-colors"
+          >
+            {cat.nome}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Menu content -->
+  <section class="py-8 md:py-12 bg-sabbia-50">
+    <div class="max-w-2xl mx-auto px-4 space-y-10">
+      {menuData.categorie.map((cat) => (
+        <div class="fade-in">
+          <MenuCategory
+            nome={cat.nome}
+            id={cat.id}
+            icona={cat.icona}
+            voci={cat.voci}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Footer note -->
+  <section class="pb-12 bg-sabbia-50">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="flex items-start gap-3 bg-gray-50 border border-gray-200 rounded-xl p-4">
+        <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+        </svg>
+        <p class="text-sm text-gray-500">
+          I prezzi possono subire variazioni. Chiedete al personale per allergeni e intolleranze.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  function initMenuScrollSpy() {
+    const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.quick-nav-link');
+    if (!navLinks.length) return;
+
+    const activeClass = ['bg-mare-600', 'text-white'];
+    const inactiveClass = ['text-mare-700', 'bg-mare-50'];
+
+    function setActive(id: string) {
+      navLinks.forEach((link) => {
+        const target = link.getAttribute('data-nav-target');
+        if (target === id) {
+          link.classList.remove(...inactiveClass);
+          link.classList.add(...activeClass);
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          link.classList.remove(...activeClass);
+          link.classList.add(...inactiveClass);
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  initMenuScrollSpy();
+  document.addEventListener('astro:after-swap', initMenuScrollSpy);
+</script>

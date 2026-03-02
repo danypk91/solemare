@@ -1,0 +1,30 @@
+---
+interface Props {
+  nome: string;
+  prezzo: string;
+  descrizione?: string;
+  badge?: string;
+}
+
+const { nome, prezzo, descrizione, badge } = Astro.props;
+
+const badgeClasses = badge === 'Popolare'
+  ? 'bg-mare-100 text-mare-700'
+  : 'bg-sabbia-100 text-sabbia-700';
+---
+
+<div class="group hover:bg-mare-50/50 rounded-lg px-2 -mx-2 py-2.5 transition-colors">
+  <div class="flex items-baseline gap-2">
+    <span class="text-gray-800 text-base font-medium shrink-0">{nome}</span>
+    {badge && (
+      <span class:list={['text-xs font-semibold px-2 py-0.5 rounded-full shrink-0', badgeClasses]}>
+        {badge}
+      </span>
+    )}
+    <span class="flex-1 border-b border-dotted border-gray-300 min-w-[2rem] translate-y-[-4px]"></span>
+    <span class="shrink-0 font-semibold text-mare-700 text-base">&euro; {prezzo}</span>
+  </div>
+  {descrizione && (
+    <p class="text-sm text-gray-500 mt-0.5 pl-0">{descrizione}</p>
+  )}
+</div>

@@ -1,0 +1,67 @@
+{
+  "categorie": [
+    {
+      "nome": "Caffetteria",
+      "id": "caffetteria",
+      "icona": "coffee",
+      "voci": [
+        { "nome": "Caff\u00e8 espresso", "prezzo": "1.20", "badge": "Popolare" },
+        { "nome": "Caff\u00e8 decaffeinato", "prezzo": "1.30" },
+        { "nome": "Cappuccino", "prezzo": "1.80" },
+        { "nome": "Latte macchiato", "prezzo": "1.60" },
+        { "nome": "T\u00e8 / Camomilla", "prezzo": "2.00" },
+        { "nome": "Cioccolata calda", "prezzo": "2.50" },
+        { "nome": "Caff\u00e8 shakerato", "prezzo": "3.00", "descrizione": "Espresso shakerato con ghiaccio, cremoso e rinfrescante", "badge": "Novit\u00e0" },
+        { "nome": "Caff\u00e8 freddo", "prezzo": "2.50" }
+      ]
+    },
+    {
+      "nome": "Bevande",
+      "id": "bevande",
+      "icona": "drink",
+      "voci": [
+        { "nome": "Acqua naturale 50cl", "prezzo": "1.50" },
+        { "nome": "Acqua frizzante 50cl", "prezzo": "1.50" },
+        { "nome": "Coca-Cola / Fanta / Sprite", "prezzo": "3.00" },
+        { "nome": "Succo di frutta", "prezzo": "2.50" },
+        { "nome": "T\u00e8 freddo", "prezzo": "3.00" },
+        { "nome": "Birra alla spina 20cl", "prezzo": "3.00" },
+        { "nome": "Birra alla spina 40cl", "prezzo": "5.00" },
+        { "nome": "Birra in bottiglia", "prezzo": "4.00" },
+        { "nome": "Prosecco (calice)", "prezzo": "4.00" },
+        { "nome": "Vino bianco/rosso (calice)", "prezzo": "3.50" }
+      ]
+    },
+    {
+      "nome": "Cocktail & Aperitivi",
+      "id": "cocktail",
+      "icona": "cocktail",
+      "voci": [
+        { "nome": "Spritz Aperol", "prezzo": "5.00", "descrizione": "Il classico aperitivo italiano con Aperol, prosecco e soda", "badge": "Popolare" },
+        { "nome": "Spritz Campari", "prezzo": "5.00" },
+        { "nome": "Negroni", "prezzo": "6.00" },
+        { "nome": "Gin Tonic", "prezzo": "6.00" },
+        { "nome": "Mojito", "prezzo": "6.00" },
+        { "nome": "Caipirinha", "prezzo": "6.00" },
+        { "nome": "Pina Colada", "prezzo": "7.00" },
+        { "nome": "Analcolico frutta", "prezzo": "5.00" }
+      ]
+    },
+    {
+      "nome": "Snack & Panini",
+      "id": "snack",
+      "icona": "food",
+      "voci": [
+        { "nome": "Focaccia ligure", "prezzo": "3.00", "descrizione": "Focaccia tradizionale genovese, croccante fuori e morbida dentro", "badge": "Popolare" },
+        { "nome": "Panino prosciutto crudo", "prezzo": "4.50" },
+        { "nome": "Panino mozzarella e pomodoro", "prezzo": "4.00" },
+        { "nome": "Toast prosciutto e formaggio", "prezzo": "3.50" },
+        { "nome": "Insalatona mista", "prezzo": "7.00", "descrizione": "Insalata fresca con pomodori, mais, tonno e olive" },
+        { "nome": "Piadina farcita", "prezzo": "5.00", "badge": "Novit\u00e0" },
+        { "nome": "Patatine fritte", "prezzo": "3.50" },
+        { "nome": "Coppa gelato (2 gusti)", "prezzo": "3.50" },
+        { "nome": "Coppa gelato (3 gusti)", "prezzo": "4.50" }
+      ]
+    }
+  ]
+}

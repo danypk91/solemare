@@ -1,0 +1,45 @@
+---
+interface Props {
+  fill?: string;
+  animated?: boolean;
+  flip?: boolean;
+  variant?: 'a' | 'b';
+}
+
+const {
+  fill = 'white',
+  animated = false,
+  flip = false,
+  variant = 'a',
+} = Astro.props;
+
+const paths: Record<string, string> = {
+  a: 'M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z',
+  b: 'M0,50 C240,10 480,70 720,50 C960,30 1200,70 1440,50 L1440,80 L0,80 Z',
+};
+
+const d = paths[variant];
+---
+
+<div class:list={['wave-divider', { 'wave-divider--flip': flip }]}>
+  <svg
+    viewBox="0 0 1440 80"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class:list={['w-full', { 'wave-divider--animated': animated }]}
+    style={`display:block;`}
+  >
+    <path d={d} fill={fill} />
+  </svg>
+</div>
+
+<style>
+  .wave-divider svg {
+    height: 60px;
+  }
+  @media (min-width: 768px) {
+    .wave-divider svg {
+      height: 80px;
+    }
+  }
+</style>

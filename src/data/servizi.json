@@ -1,0 +1,32 @@
+[
+  {
+    "titolo": "Spiaggia Attrezzata",
+    "descrizione": "Ombrelloni, lettini e sdraio con servizio di prima classe. Sabbia fine e mare cristallino.",
+    "icona": "umbrella"
+  },
+  {
+    "titolo": "Bar & Ristoro",
+    "descrizione": "Caffetteria, aperitivi, cocktail e snack freschi preparati al momento per te.",
+    "icona": "cocktail"
+  },
+  {
+    "titolo": "Area Giochi Bimbi",
+    "descrizione": "Spazio sicuro e divertente per i pi piccoli, con giochi e animazione.",
+    "icona": "kids"
+  },
+  {
+    "titolo": "Wi-Fi Gratuito",
+    "descrizione": "Connessione Wi-Fi ad alta velocit in tutta la spiaggia per restare sempre connesso.",
+    "icona": "wifi"
+  },
+  {
+    "titolo": "Docce & Spogliatoi",
+    "descrizione": "Docce calde, spogliatoi puliti e servizi igienici sempre in ordine.",
+    "icona": "shower"
+  },
+  {
+    "titolo": "Parcheggio",
+    "descrizione": "Parcheggio riservato ai clienti nelle immediate vicinanze dello stabilimento.",
+    "icona": "parking"
+  }
+]
