@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PriceTable from '../components/PriceTable.astro';
 import ContactForm from '../components/ContactForm.astro';
+import WaveDivider from '../components/WaveDivider.astro';
 import siteConfig from '../data/siteConfig.json';
 import prezziData from '../data/prezzi.json';
 
@@ -13,24 +14,30 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\s/g, '').repl
   description={`Listino prezzi spiaggia e contatti di ${siteConfig.nome} a Loano. Ombrelloni, lettini, abbonamenti stagionali. Contattaci per prenotare.`}
 >
   <!-- Page header -->
-  <section class="bg-gradient-to-br from-mare-700 to-mare-800 text-white py-12 md:py-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
+  <section class="relative bg-gradient-to-br from-mare-700 to-mare-800 text-white py-12 md:py-16 overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
       <h1 class="font-display text-3xl md:text-4xl font-bold mb-2">Prezzi & Contatti</h1>
       <p class="text-mare-200">Listino spiaggia e informazioni per prenotare</p>
+    </div>
+    <!-- Wave separator -->
+    <div class="absolute -bottom-px left-0 right-0">
+      <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block">
+        <path d="M0 60V30C240 0 480 0 720 30C960 60 1200 60 1440 30V60H0Z" fill="white"/>
+      </svg>
     </div>
   </section>
 
   <!-- Prezzi Spiaggia -->
   <section class="py-12 md:py-20">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-10 fade-in">
+      <div class="text-center mb-10 blur-in">
         <span class="text-sm font-semibold uppercase tracking-wider text-mare-500 mb-2 block">Listino</span>
         <h2 class="font-display text-3xl md:text-4xl font-bold text-mare-900">Prezzi Spiaggia</h2>
       </div>
 
-      <div class="space-y-8">
-        {prezziData.periodi.map((periodo) => (
-          <div class="fade-in">
+      <div class="space-y-8 stagger-children">
+        {prezziData.periodi.map((periodo, i) => (
+          <div class="scale-in" style={`--stagger-index: ${i}`}>
             <PriceTable
               nome={periodo.nome}
               date={periodo.date}
@@ -43,25 +50,26 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\s/g, '').repl
       <p class="text-center text-sm text-gray-500 mt-6 fade-in">{prezziData.note}</p>
     </div>
   </section>
+  <WaveDivider fill="var(--color-sabbia-50)" variant="a" />
 
   <!-- Abbonamenti -->
   <section class="py-12 md:py-20 bg-sabbia-50">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-10 fade-in">
+      <div class="text-center mb-10 blur-in">
         <span class="text-sm font-semibold uppercase tracking-wider text-sabbia-600 mb-2 block">Risparmia</span>
         <h2 class="font-display text-3xl md:text-4xl font-bold text-mare-900">Abbonamenti</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {prezziData.abbonamenti.map((abb) => {
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger-children">
+        {prezziData.abbonamenti.map((abb, i) => {
           const isHighlighted = abb.nome === 'Stagionale Standard';
           return (
             <div class:list={[
-              'relative rounded-2xl p-6 hover:shadow-md transition-shadow fade-in',
+              'relative rounded-2xl p-6 hover:shadow-md transition-shadow scale-in',
               isHighlighted
                 ? 'bg-mare-50 border-2 border-mare-500 shadow-md'
                 : 'bg-white border border-gray-100 shadow-sm',
-            ]}>
+            ]} style={`--stagger-index: ${i}`}>
               {isHighlighted && (
                 <span class="absolute -top-3 right-4 bg-mare-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                   Più scelto
@@ -76,23 +84,24 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\s/g, '').repl
       </div>
     </div>
   </section>
+  <WaveDivider fill="var(--color-sabbia-50)" variant="b" flip />
 
   <!-- Contatti -->
   <section id="contatti" class="py-12 md:py-20 scroll-mt-16">
     <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-10 fade-in">
+      <div class="text-center mb-10 blur-in">
         <span class="text-sm font-semibold uppercase tracking-wider text-mare-500 mb-2 block">Scrivici</span>
         <h2 class="font-display text-3xl md:text-4xl font-bold text-mare-900">Contattaci</h2>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Form -->
-        <div class="fade-in">
+        <div class="slide-in-left">
           <ContactForm />
         </div>
 
         <!-- Info di contatto -->
-        <div class="fade-in space-y-6">
+        <div class="slide-in-right space-y-6">
           <!-- Canali diretti -->
           <div class="space-y-3">
             <a
@@ -166,7 +175,7 @@ const whatsappUrl = `https://wa.me/${siteConfig.whatsapp.replace(/\s/g, '').repl
 
   <!-- Google Maps -->
   <section class="pb-12 md:pb-20">
-    <div class="max-w-4xl mx-auto px-4 fade-in">
+    <div class="max-w-4xl mx-auto px-4 scale-in">
       <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-[300px] md:h-[400px]">
         <iframe
           src={siteConfig.mapsUrl}

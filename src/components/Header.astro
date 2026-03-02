@@ -408,15 +408,14 @@ const navLinks = [
 </style>
 
 <script>
-  const toggle = document.getElementById('menu-toggle')!;
-  const menu = document.getElementById('mobile-menu')!;
-  const overlay = document.getElementById('mobile-overlay')!;
-  const hamburger = document.getElementById('hamburger-icon')!;
-  const header = document.getElementById('site-header')!;
-
   let isOpen = false;
 
   function openMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+    const hamburger = document.getElementById('hamburger-icon');
+    const toggle = document.getElementById('menu-toggle');
+    if (!menu || !overlay || !hamburger || !toggle) return;
     isOpen = true;
     menu.classList.add('is-open');
     overlay.classList.add('is-visible');
@@ -428,6 +427,11 @@ const navLinks = [
   }
 
   function closeMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-overlay');
+    const hamburger = document.getElementById('hamburger-icon');
+    const toggle = document.getElementById('menu-toggle');
+    if (!menu || !overlay || !hamburger || !toggle) return;
     isOpen = false;
     menu.classList.remove('is-open');
     overlay.classList.remove('is-visible');
@@ -438,14 +442,33 @@ const navLinks = [
     document.body.style.overflow = '';
   }
 
-  toggle.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
-  overlay.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closeMenu(); });
-  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+  // Event delegation — survives DOM swaps during View Transitions
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('#menu-toggle')) {
+      isOpen ? closeMenu() : openMenu();
+    } else if (target.closest('#mobile-overlay')) {
+      closeMenu();
+    } else if (target.closest('#mobile-menu a')) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) closeMenu();
+  });
 
   function updateHeader() {
-    header.classList.toggle('header-scrolled', window.scrollY > 10);
+    const header = document.getElementById('site-header');
+    if (header) header.classList.toggle('header-scrolled', window.scrollY > 10);
   }
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
+
+  // Reset menu state after View Transition navigation
+  document.addEventListener('astro:after-swap', () => {
+    isOpen = false;
+    document.body.style.overflow = '';
+    updateHeader();
+  });
 </script>
