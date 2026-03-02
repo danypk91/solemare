@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/* ── Local fonts ── */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/inter-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/playfair-variable.woff2') format('woff2');
+}
+
 @theme {
   /* Palette - Mediterranean */
   --color-mare-50: #eff8ff;

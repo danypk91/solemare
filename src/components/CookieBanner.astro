@@ -1,0 +1,57 @@
+---
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 translate-y-full transition-transform duration-500 ease-out"
+  role="alert"
+  aria-live="polite"
+>
+  <div class="bg-mare-950/95 backdrop-blur-sm border-t border-mare-800 px-4 py-4 md:py-3">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+      <p class="text-sm text-mare-200 flex-1">
+        Questo sito utilizza cookie tecnici per garantire il corretto funzionamento.
+        Leggi la nostra <a href="/cookie-policy" class="underline underline-offset-2 text-white hover:text-sabbia-300 transition-colors">Cookie Policy</a>.
+      </p>
+      <div class="flex gap-2 shrink-0">
+        <button
+          id="cookie-accept"
+          class="px-4 py-2 bg-sabbia-500 hover:bg-sabbia-600 text-white text-sm font-semibold rounded-lg transition-colors cursor-pointer"
+        >
+          Accetta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (!banner || !acceptBtn) return;
+
+    if (localStorage.getItem('cookie-consent')) {
+      banner.remove();
+      return;
+    }
+
+    // Show banner after a short delay
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        banner.classList.remove('translate-y-full');
+        banner.classList.add('translate-y-0');
+      });
+    });
+
+    acceptBtn.addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', '1');
+      banner.classList.remove('translate-y-0');
+      banner.classList.add('translate-y-full');
+      banner.addEventListener('transitionend', () => banner.remove(), { once: true });
+    });
+  }
+
+  initCookieBanner();
+  document.addEventListener('astro:after-swap', initCookieBanner);
+</script>
